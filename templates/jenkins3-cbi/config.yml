@@ -1,0 +1,5 @@
+name: Jenkins3-CBI
+description: |
+  Jenkins CI server (LTS)
+version: 2.46.1
+category: Continuous Integration

@@ -1,0 +1,33 @@
+
+version: '2'
+
+services:
+  jenkins-primary:
+    image:  "jenkins:2.32.3"
+    user: root
+    ports:
+      - "${PORT}:8080"
+    environment:
+      - TZ=America/Los_Angeles
+    labels:
+      io.rancher.sidekicks: jenkins-plugins,jenkins-datavolume
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label: hostname=caffeine
+    volumes_from:
+      - jenkins-plugins
+      - jenkins-datavolume
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/lib/libdevmapper.so.1.02:/usr/lib/libdevmapper.so.1.02
+    entrypoint: /usr/share/jenkins/rancher/add-docker.sh
+
+  jenkins-plugins:
+    image: biodev.ece.ucsb.edu:5000/jenkins-cbi-plugins:v0.1.1
+  jenkins-datavolume:
+    image: "busybox"
+    volumes:
+      - ${volume_work}:/var/jenkins_home
+    labels:
+      io.rancher.container.start_once: true
+    entrypoint: ["chown", "-R", "1000:1000", "/var/jenkins_home"]

@@ -1,0 +1,5 @@
+name: CBI-Jenkins
+description: |
+  Jenkins CI server (LTS)
+version: 2.7.4
+category: Continuous Integration
