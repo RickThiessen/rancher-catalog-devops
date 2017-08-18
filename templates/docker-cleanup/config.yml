@@ -1,7 +1,6 @@
 name: Docker Cleanup
 description: |
-  Docker Cleanup Script.  Runs a cleanup of Docker Containers to maintain a usable list of images 
-  so we don't run out of Version image links.
-  
+  Docker Cleanup Script
 version: 0
 category: DevOps Tools 
+
