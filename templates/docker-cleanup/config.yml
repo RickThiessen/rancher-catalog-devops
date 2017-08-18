@@ -1,6 +1,9 @@
 name: Docker Cleanup
-description: |
+description: >
   Docker Cleanup Script
-version: 0
+version: 0.0.1-rancher1
 category: DevOps Tools 
+maintainer: Rick Thiessen <rpthiessen@appriss.com>
+license: Apache2
+projectURL: https://github.com/RickThiessen/rancher-catalog-devops
 
