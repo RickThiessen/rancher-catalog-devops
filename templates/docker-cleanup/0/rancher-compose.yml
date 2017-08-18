@@ -2,10 +2,3 @@
   name: DockerCleanup
   version: 0.0.1
   description: Docker Cleanup for Version Control
-  minimum_rancher_version: 0.0.1
-  maximum_rancher_version: >=1.0.0
-
-services:
-  DockerCleanup:
-    start_on_create: true
-
