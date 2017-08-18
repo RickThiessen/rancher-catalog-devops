@@ -1,5 +1,5 @@
 name: Docker Cleanup
-description: >
+description: |
   Docker Cleanup Script
 version: 0.0.1-rancher1
 category: DevOps Tools 
