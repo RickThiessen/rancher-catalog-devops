@@ -1,13 +1,7 @@
-name: Docker Cleanup # Name of the Catalog Entry
+name: Docker Cleanup
 description: |
   Docker Cleanup Script.  Runs a cleanup of Docker Containers to maintain a usable list of images 
   so we don't run out of Version image links.
   
-version: 0 # Version of the Catalog to be used
-category: DevOps Tools  # Category to be used for searching catalog entries
-maintainer: Rick Thiessen <rpthiessen@appriss.com> # The maintainer of the catalog entry
-license: Copyright Appriss Inc. # The license
-projectURL: None # A URL related to the catalog entry
-labels:
-  io.rancher.orchestration.supported: 'cattle'
-  
+version: 0
+category: DevOps Tools 
