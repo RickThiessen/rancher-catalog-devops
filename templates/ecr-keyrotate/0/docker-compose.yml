@@ -1,0 +1,18 @@
+ecr-keyrotate:
+  image: 571978632649.dkr.ecr.us-east-1.amazonaws.com/appriss-devops-services/ecr_keyrotate:latest
+  stdin_open: true
+  tty: true
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+  environment:
+    AWS_ACCESS_KEY_ID: ${aws_access_key_id}
+    AWS_SECRET_ACCESS_KEY: ${aws_secret_access_key}
+    AWS_DEFAULT_REGION: ${aws_region}
+    RANCHER_ACCESS_KEY: ${rancher_access_key}
+    RANCHER_SECRET_KEY: ${rancher_secret_key}
+    RANCHER_URL: ${rancher_url}
+    PROJECT_ID: ${project_id}
+    ECR_REGISTRY_ADDRESS: ${ecr_registry}
+    SLEEP_TIME: ${sleep_time}
