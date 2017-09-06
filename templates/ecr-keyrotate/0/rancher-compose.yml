@@ -1,9 +1,4 @@
 .catalog:
-  name: test-app
-  version: 0.0.1
-  description:  Description of the versioned template of the Catalog Entry
-
-.catalog:
   name: "ECR Key Rotator"
   version: "v0.0.1"
   description: "Updates credentials for ECR in Rancher"
@@ -26,44 +21,37 @@
       default: us-east-1
       required: true
       type: "string"
-
     - variable: "rancher_access_key"
       label: "Rancher Access Key"
       description: "Rancher Access Key Created in API Keys"
       required: false
       type: "string"
-
     - variable: "rancher_secret_key"
       label: "Rancher Secret Key"
       description: "Rancher Access Key Created in API Keys"
       required: false
       type: "string"
-
     - variable: "rancher_url"
       label: "Rancher URL"
       description: "Rancher URL for API access"
       required: false
       type: "string"
-
     - variable: "project_id"
       label: "Project ID"
       description: "Rancher Environment Project ID (See URL above for ID Value"
       required: false
       type: "string"
-
     - variable: "ecr_registry"
       label: "ECR Registry URL"
       description: "AWS ECR Registry Base URL"
       default: 571978632649.dkr.ecr.us-east-1.amazonaws.com
       required: true
       type: "string"
-
     - variable: "sleep_time"
       label: "Sleep Time"
       description: "Time to Sleep between Runs"
       default: 36000
       required: true
       type: "string"
-
 ecr-updater:
   scale: 1
