@@ -2,8 +2,6 @@
   name: "ECR Key Rotator"
   version: 0.0.1
   description: "Updates credentials for ECR in Rancher"
-  uuid: ecr-3
-  maximum_rancher_version: "v1.4.99"
   questions:
     - variable: "aws_access_key_id"
       label: "AWS Access Key ID"
