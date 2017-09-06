@@ -2,7 +2,7 @@ name: Ecr Keyrotate
 description: |
   Rotates AWS Auth Credentials every 12 hours
 version: 0.0.1
-category: DevOps
+category: DevOps Tools
 maintainer: Rick Thiessen <rpthiessen@appriss.com
 license: Apache2
 projectURL: https://github.com/RickThiessen/rancher-catalog-devops
