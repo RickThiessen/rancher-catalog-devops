@@ -1,7 +1,7 @@
-name: ecr-keyrotate
+name: Ecr Keyrotate
 description: |
   Rotates AWS Auth Credentials every 12 hours
-version: 0.0.0
+version: 0.0.1
 category: DevOps
 maintainer: Rick Thiessen <rpthiessen@appriss.com
 license: Apache2
