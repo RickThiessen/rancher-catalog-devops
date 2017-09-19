@@ -1,0 +1,22 @@
+.catalog:
+  name: unBound DNS
+  version: 0.0.1
+  description: unBound DNS for Rancher Containers
+  questions:
+    - variable: "vpc_dns"
+      label: "VPC DNS IP"
+      description: "default VPC DNS IP Address "
+      required: true
+      type: "string"
+
+    - variable: "onprem_domain"
+      label: "On Prem Domain"
+      description: "domain traffic to filter and send to the onprem dns server (some.domain.com)"
+      required: true
+      type: "string"
+
+    - variable: "onprem_dns"
+      label: "On Prem DNS"
+      description: "onprem dns server (ip address)"
+      required: true
+      type: "string"

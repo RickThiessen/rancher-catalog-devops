@@ -1,0 +1,13 @@
+unbound-dns:
+  image: 571978632649.dkr.ecr.us-east-1.amazonaws.com/appriss-devops-services/unbound-dns:latest
+  stdin_open: true
+ 
+  tty: true
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+  environment:
+    vpc_dns: ${vpc_dns}
+    onprem_domain: ${onprem_domain}
+    onprem_dns: ${onprem_dns}
