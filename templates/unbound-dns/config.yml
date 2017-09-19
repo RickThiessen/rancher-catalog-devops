@@ -1,6 +1,6 @@
-name: Docker Cleanup
+name: unBound DNS
 description: |
-  Docker Cleanup Script
+  Docker unBound DNS Service
 version: 0.0.1
 category: DevOps Tools 
 maintainer: Rick Thiessen <rpthiessen@appriss.com>
