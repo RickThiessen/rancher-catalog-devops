@@ -1,6 +1,6 @@
 .catalog:
   name: "ECR Key Rotator"
-  version: 0.0.1
+  version: 0.0.2
   description: "Updates credentials for ECR in Rancher"
   questions:
     - variable: "aws_access_key_id"
