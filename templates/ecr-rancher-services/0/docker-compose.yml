@@ -1,0 +1,14 @@
+services:
+  RancherAdminService-lb:
+    image: rancher/lb-service-haproxy:v0.7.6
+    ports:
+    - 443:443/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+  RancherAdminService-v2:
+    image: 571978632649.dkr.ecr.us-east-1.amazonaws.com/appriss-devops-services/ecr-rancher-services
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always

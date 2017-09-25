@@ -1,0 +1,8 @@
+name: ECR Rancher Services
+description: |
+  Manage ECR Rancher Environment
+version: 0.0.1
+category: DevOps Tools
+maintainer: Rick Thiessen <rpthiessen@appriss.com>
+license: Apache2
+projectURL: https://github.com/RickThiessen/rancher-catalog-devops
