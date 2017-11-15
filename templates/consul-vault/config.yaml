@@ -1,4 +1,4 @@
-name: Consul / Vault
+name: Consul Services
 description: |
   Consul with Vault Install
 version: 0.0.1

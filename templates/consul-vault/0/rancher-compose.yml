@@ -1,5 +1,5 @@
 .catalog:
-  name: ConsulVault
+  name: ConsulServices
   version: 0.0.1
   description: Docker Consul & Vault
 services:
