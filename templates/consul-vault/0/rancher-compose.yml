@@ -1,4 +1,7 @@
-version: '2'
+.catalog:
+  name: ConsulVault
+  version: 0.0.1
+  description: Docker Consul & Vault
 services:
   consul-1:
     scale: 1

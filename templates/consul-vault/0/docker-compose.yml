@@ -1,5 +1,4 @@
-version: '2'
-
+ConsulVault:
 services:
   consul-lb:
     image: rancher/lb-service-haproxy:latest
