@@ -1,0 +1,92 @@
+version: '2'
+
+services:
+  consul-lb:
+    image: rancher/lb-service-haproxy:latest
+    ports:
+      - 8400
+      - 8500
+      - 8600
+    expose:
+      - 8400
+      - 8500
+      - 8600
+    environment:
+      - SERVICE_8500_NAME=consul-admin
+    labels:
+      io.rancher.container.network: true
+
+  consul-1:
+    command: "-server -bootstrap-expect 3 -ui-dir /ui"
+    image: progrium/consul:latest
+    ports:
+      - 8400
+      - 8500
+      - 8600
+    environment:
+      - SERVICE_8300_IGNORE=yes
+      - SERVICE_8301_IGNORE=yes
+      - SERVICE_8302_IGNORE=yes
+      - SERVICE_8400_IGNORE=yes
+      - SERVICE_8600_IGNORE=yes
+    labels:
+      io.rancher.container.network: true
+      io.rancher.container.hostname_override: container_name
+      consul: 'true'
+
+  consul-2:
+    command: "-server -join consul-1"
+    image: progrium/consul:latest
+    ports:
+      - 8400
+      - 8500
+      - 8600
+    depends_on:
+      - consul-1
+    environment:
+      - SERVICE_8300_IGNORE=yes
+      - SERVICE_8301_IGNORE=yes
+      - SERVICE_8302_IGNORE=yes
+      - SERVICE_8400_IGNORE=yes
+      - SERVICE_8600_IGNORE=yes
+    labels:
+      io.rancher.container.network: true
+      io.rancher.container.hostname_override: container_name
+      consul: true
+
+  consul-3:
+    command: "-server -join consul-1"
+    image: progrium/consul:latest
+    ports:
+      - 8400
+      - 8500
+      - 8600
+    depends_on:
+      - consul-1
+    environment:
+      - SERVICE_8300_IGNORE=yes
+      - SERVICE_8301_IGNORE=yes
+      - SERVICE_8302_IGNORE=yes
+      - SERVICE_8400_IGNORE=yes
+      - SERVICE_8600_IGNORE=yes
+    labels:
+      io.rancher.container.network: true
+      io.rancher.container.hostname_override: container_name
+      consul: true
+      
+  registrator:
+    image: gliderlabs/registrator:master
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    depends_on:
+      - consul-lb
+    command:
+      - -internal
+      - -useIpFromLabel
+      - io.rancher.container.ip
+      - consul://consul-lb:8500
+    labels:
+      io.rancher.container.network: true
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.global: 'true'
+      

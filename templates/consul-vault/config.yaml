@@ -1,0 +1,9 @@
+name: Consul / Vault
+description: |
+  Consul with Vault Install
+version: 0.0.1
+category: DevOps Tools 
+maintainer: Rick Thiessen <rpthiessen@appriss.com>
+license: Apache2
+projectURL: https://github.com/RickThiessen/rancher-catalog-devops
+

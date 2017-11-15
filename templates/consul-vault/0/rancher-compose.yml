@@ -1,0 +1,43 @@
+version: '2'
+services:
+  consul-1:
+    scale: 1
+    start_on_create: true
+  consul-2:
+    scale: 1
+    start_on_create: true
+  consul-3:
+    scale: 1
+    start_on_create: true
+  registrator:
+    start_on_create: true
+  consul-lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: tcp
+        selector: consul=true
+        source_port: 8400
+        target_port: 8400
+      - priority: 1
+        protocol: tcp
+        selector: consul=true
+        source_port: 8500
+        target_port: 8500
+      - priority: 1
+        protocol: tcp
+        selector: consul=true
+        source_port: 8600
+        target_port: 8600
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
+      
