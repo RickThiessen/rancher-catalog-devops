@@ -1,4 +1,4 @@
-services:
+consul-vault:
   consul-lb:
     image: rancher/lb-service-haproxy:latest
     ports:
