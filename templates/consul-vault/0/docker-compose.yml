@@ -12,7 +12,10 @@ services:
     environment:
       - SERVICE_8500_NAME=consul-admin
     labels:
-      io.rancher.container.network: true
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.network: 'true'
+      io.rancher.scheduler.global: true
 
   consul-1:
     command: "-server -bootstrap-expect 3 -ui-dir /ui"
@@ -84,7 +87,6 @@ services:
       - io.rancher.container.ip
       - consul://consul-lb:8500
     labels:
-      io.rancher.container.network: true
       io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.global: 'true'
-      
+      io.rancher.scheduler.global: true
+      io.rancher.container.network: true
