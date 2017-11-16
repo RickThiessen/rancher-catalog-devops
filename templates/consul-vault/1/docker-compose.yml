@@ -1,0 +1,90 @@
+version: '2'
+services:
+  consul-1:
+    image: progrium/consul:latest
+    environment:
+      SERVICE_8300_IGNORE: 'yes'
+      SERVICE_8301_IGNORE: 'yes'
+      SERVICE_8302_IGNORE: 'yes'
+      SERVICE_8400_IGNORE: 'yes'
+      SERVICE_8600_IGNORE: 'yes'
+    ports:
+    - 53110:8400/tcp
+    - 55261:8500/tcp
+    - 49355:8600/tcp
+    command:
+    - -server
+    - -bootstrap-expect
+    - '3'
+    - -ui-dir
+    - /ui
+    labels:
+      io.rancher.container.hostname_override: container_name
+      consul: 'true'
+      io.rancher.container.network: 'true'
+  consul-2:
+    image: progrium/consul:latest
+    environment:
+      SERVICE_8300_IGNORE: 'yes'
+      SERVICE_8301_IGNORE: 'yes'
+      SERVICE_8302_IGNORE: 'yes'
+      SERVICE_8400_IGNORE: 'yes'
+      SERVICE_8600_IGNORE: 'yes'
+    ports:
+    - 59441:8400/tcp
+    - 55065:8500/tcp
+    - 61014:8600/tcp
+    command:
+    - -server
+    - -join
+    - consul-1
+    labels:
+      io.rancher.container.hostname_override: container_name
+      consul: 'true'
+      io.rancher.container.network: 'true'
+  consul-3:
+    image: progrium/consul:latest
+    environment:
+      SERVICE_8300_IGNORE: 'yes'
+      SERVICE_8301_IGNORE: 'yes'
+      SERVICE_8302_IGNORE: 'yes'
+      SERVICE_8400_IGNORE: 'yes'
+      SERVICE_8600_IGNORE: 'yes'
+    ports:
+    - 60507:8400/tcp
+    - 59196:8500/tcp
+    - 65256:8600/tcp
+    command:
+    - -server
+    - -join
+    - consul-1
+    labels:
+      io.rancher.container.hostname_override: container_name
+      consul: 'true'
+      io.rancher.container.network: 'true'
+  registrator:
+    image: gliderlabs/registrator:master
+    volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+    command:
+    - -internal
+    - -useIpFromLabel
+    - io.rancher.container.ip
+    - consul://consul-lb:8500
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.network: 'true'
+  consul-lb:
+    image: rancher/lb-service-haproxy:v0.7.9
+    environment:
+      SERVICE_8500_NAME: consul-admin
+    ports:
+    - 8400:8400/tcp
+    - 8500:8500/tcp
+    - 8600:8600/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.network: 'true'
