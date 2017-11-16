@@ -76,7 +76,7 @@ services:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.network: 'true'
   consul-lb:
-    image: rancher/lb-service-haproxy:v0.7.9
+    image: rancher/lb-service-haproxy:latest
     environment:
       SERVICE_8500_NAME: consul-admin
     ports:
