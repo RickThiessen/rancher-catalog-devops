@@ -1,4 +1,4 @@
-services:
+consul-vault:
   consul-lb:
     image: rancher/lb-service-haproxy:latest
     ports:
@@ -15,7 +15,7 @@ services:
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
       io.rancher.container.network: 'true'
-      io.rancher.scheduler.global: true
+      io.rancher.scheduler.global: 'true'
 
   consul-1:
     command: "-server -bootstrap-expect 3 -ui-dir /ui"
@@ -31,9 +31,9 @@ services:
       - SERVICE_8400_IGNORE=yes
       - SERVICE_8600_IGNORE=yes
     labels:
-      io.rancher.container.network: true
+      io.rancher.container.network: 'true'
       io.rancher.container.hostname_override: container_name
-      consul: 'true'
+      consul: true
 
   consul-2:
     command: "-server -join consul-1"
@@ -51,7 +51,7 @@ services:
       - SERVICE_8400_IGNORE=yes
       - SERVICE_8600_IGNORE=yes
     labels:
-      io.rancher.container.network: true
+      io.rancher.container.network: 'true'
       io.rancher.container.hostname_override: container_name
       consul: true
 
@@ -71,7 +71,7 @@ services:
       - SERVICE_8400_IGNORE=yes
       - SERVICE_8600_IGNORE=yes
     labels:
-      io.rancher.container.network: true
+      io.rancher.container.network: 'true'
       io.rancher.container.hostname_override: container_name
       consul: true
       
@@ -88,5 +88,5 @@ services:
       - consul://consul-lb:8500
     labels:
       io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.global: true
-      io.rancher.container.network: true
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.network: 'true'
