@@ -19,7 +19,6 @@ services:
     - 55261:8500/tcp
     - 49355:8600/tcp
     - 8500:8500/tcp
-    log_driver: ''
     command:
     - agent
     - -server
