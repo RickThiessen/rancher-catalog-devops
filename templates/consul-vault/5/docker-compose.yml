@@ -16,9 +16,8 @@ services:
     restart: always
     ports:
     - 84000:8400/tcp
-    - 85000:8500/tcp
     - 86000:8600/tcp
-    - 8500:8500/tcp
+    - 85000:8500/tcp
     command:
     - agent
     - -server
@@ -60,20 +59,20 @@ services:
     - '300'
     - -ttl-refresh
     - '60'
-    - consul://localhost:8500
+    - consul://localhost:8501
     labels:
       io.rancher.container.dns: 'true'
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
   consul-lb:
-    image: rancher/lb-service-haproxy:latest
+    image: rancher/lb-service-haproxy:v0.7.9
     environment:
       SERVICE_8500_NAME: consul-admin
     ports:
-    - 8400:8400/tcp
-    - 8500:8500/tcp
-    - 8600:8600/tcp
+    - 8400:84000/tcp
+    - 8501:85000/tcp
+    - 8600:86000/tcp
     labels:
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
