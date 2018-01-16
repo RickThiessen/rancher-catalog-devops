@@ -15,7 +15,6 @@ services:
     tty: true
     restart: always
     ports:
-    - 8300:8300/tcp
     - 8301:8301/tcp
     - 8301:8301/udp
     - 8302:8302/tcp
