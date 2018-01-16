@@ -36,7 +36,7 @@ services:
       - datastorage
     labels:
       io.rancher.container.dns: 'true'
-      io.rancher.sidekicks: data
+      io.rancher.sidekicks: datastorage,registrator
       consul: 'true'
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
@@ -67,10 +67,10 @@ services:
     - '300'
     - -ttl-refresh
     - '60'
-    - consul://consul:8500
+    - consul://localhost:8500
     labels:
-      io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
 
   consul-lb:
     image: rancher/lb-service-haproxy:v0.7.9
