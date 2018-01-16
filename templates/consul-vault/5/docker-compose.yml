@@ -15,9 +15,9 @@ services:
     tty: true
     restart: always
     ports:
-    - 53110:8400/tcp
-    - 55261:8500/tcp
-    - 49355:8600/tcp
+    - 84000:8400/tcp
+    - 85000:8500/tcp
+    - 86000:8600/tcp
     - 8500:8500/tcp
     command:
     - agent
