@@ -33,16 +33,16 @@ services:
     - -retry-join
     - consul-lb
     volumes_from:
-      - consul-data
+      - datastorage
     labels:
       io.rancher.container.dns: 'true'
-      io.rancher.sidekicks: consul-data
+      io.rancher.sidekicks: data
       consul: 'true'
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
 
-  consul-data:
+  datastorage:
     image: consul:latest
     entrypoint:
     - /bin/true
@@ -53,7 +53,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.global: 'true'
 
-  consul-registrator:
+  registrator:
     image: gliderlabs/registrator:latest
     stdin_open: true
     network_mode: host
@@ -67,7 +67,7 @@ services:
     - '300'
     - -ttl-refresh
     - '60'
-    - consul://consul-lb:8500
+    - consul://consul:8500
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
