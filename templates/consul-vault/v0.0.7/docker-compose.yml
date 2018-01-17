@@ -48,6 +48,7 @@ services:
       io.rancher.scheduler.global: 'true'
 
   registrator:
+    privileged: true
     image: gliderlabs/registrator:latest
     stdin_open: true
     network_mode: host
@@ -63,8 +64,10 @@ services:
     - '60'
     - consul://localhost:8500
     labels:
-      io.rancher.container.pull_image: always
+      io.rancher.container.dns: true
       io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: true
 
   consul-lb:
     image: rancher/lb-service-haproxy:v0.7.9
