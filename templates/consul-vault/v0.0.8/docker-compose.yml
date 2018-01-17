@@ -18,7 +18,7 @@ services:
     - 8400:8400/tcp
     - 8500:8500/tcp
     - 8600:8600/tcp
-    command: "agent -server -bootstrap-expect 3 -ui -retry-join consul-vault=consul-1"
+    command: "agent -server -bootstrap-expect 3 -ui -retry-join consul-vault-consul-1"
     volumes_from:
       - datastorage
     labels:
