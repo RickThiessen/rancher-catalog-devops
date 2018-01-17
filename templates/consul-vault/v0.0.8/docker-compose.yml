@@ -1,0 +1,70 @@
+version: '2'
+services:
+  consul:
+    image: consul:latest
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+      CONSUL_LOCAL_CONFIG: '{"leave_on_terminate": true}'
+      SERVICE_8300_IGNORE: 'yes'
+      SERVICE_8301_IGNORE: 'yes'
+      SERVICE_8302_IGNORE: 'yes'
+      SERVICE_8400_IGNORE: 'yes'
+      SERVICE_8600_IGNORE: 'yes'
+    stdin_open: true
+    network_mode: host
+    tty: true
+    restart: always
+    ports:
+    - 8400:8400/tcp
+    - 8500:8500/tcp
+    - 8600:8600/tcp
+    command: "agent -server -bootstrap-expect 3 -ui -retry-join consul-vault=consul-1"
+    volumes_from:
+      - datastorage
+    labels:
+      io.rancher.container.dns: 'true'
+      io.rancher.sidekicks: datastorage,registrator
+      consul: 'true'
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
+
+  datastorage:
+    image: consul:latest
+    entrypoint:
+    - /bin/true
+    volumes:
+    - /consul/data
+    labels:
+      io.rancher.container.start_once: 'true'
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.global: 'true'
+
+  registrator:
+    privileged: true
+    image: gliderlabs/registrator:latest
+    stdin_open: true
+    network_mode: host
+    volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+    tty: true
+    command: "-resync 300 -ttl 300 -ttl-refresh 60 consul://localhost:8500"
+    labels:
+      io.rancher.container.dns: true
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: true
+
+  consul-lb:
+    image: rancher/lb-service-haproxy:v0.7.9
+    environment:
+      SERVICE_8500_NAME: consul-admin
+    ports:
+    - 8400:8400/tcp
+    - 8500:8500/tcp
+    - 8600:8600/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.network: 'true'
