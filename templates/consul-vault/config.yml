@@ -1,7 +1,7 @@
 name: "Consul Services"
 description: |
   Consul with Vault Install
-version: 0.0.6
+version: "v0.0.7"
 category: DevOps Tools 
 maintainer: Rick Thiessen <rpthiessen@appriss.com>
 license: Apache2
