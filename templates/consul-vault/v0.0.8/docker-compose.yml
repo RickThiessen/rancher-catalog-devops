@@ -32,7 +32,7 @@ services:
       - consul-vault-consul-1
     labels:
       io.rancher.container.dns: 'true'
-      io.rancher.service.selector.container
+      io.rancher.service.selector.container: 'true'
       io.rancher.sidekicks: datastorage,registrator
       consul: 'true'
       io.rancher.container.hostname_override: container_name
@@ -70,6 +70,7 @@ services:
       - consul://localhost:8500
     labels:
       io.rancher.container.dns: true
+      io.rancher.service.selector.container: 'true'
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: true
