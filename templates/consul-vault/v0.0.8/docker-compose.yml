@@ -2,7 +2,7 @@ version: '2'
 services:
   consul:
     image: consul:latest
-    depends_on:
+    links:
       - datastorage
     environment:
       CONSUL_BIND_INTERFACE: eth0
@@ -32,6 +32,7 @@ services:
       - consul-vault-consul-1
     labels:
       io.rancher.container.dns: 'true'
+      io.rancher.service.selector.container
       io.rancher.sidekicks: datastorage,registrator
       consul: 'true'
       io.rancher.container.hostname_override: container_name
@@ -50,7 +51,7 @@ services:
       io.rancher.scheduler.global: 'true'
 
   registrator:
-    depends_on:
+    links:
       - consul
     privileged: true
     image: gliderlabs/registrator:latest

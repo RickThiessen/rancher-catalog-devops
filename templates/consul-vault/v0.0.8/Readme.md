@@ -5,6 +5,7 @@
     + Added depends_on for consul and registator
     + YML Files should be indented with Spaces
     + integer values should be Quoted '3'
+    + Changed Depends_on to links
 
 - v0.0.7 - 01/17/2017 - Rick Thiessen
     + removed the un-needed ports.
