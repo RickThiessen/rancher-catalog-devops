@@ -3,6 +3,8 @@
     + Modified Join to point at the Rancher Service Names
         * consul-vault-consul-1
     + Added depends_on for consul and registator
+    + YML Files should be indented with Spaces
+    + integer values should be Quoted '3'
 
 - v0.0.7 - 01/17/2017 - Rick Thiessen
     + removed the un-needed ports.

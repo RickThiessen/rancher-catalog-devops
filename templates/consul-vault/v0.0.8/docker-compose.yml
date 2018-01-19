@@ -26,7 +26,7 @@ services:
       - agent 
       - -server
       - -bootstrap-expect
-      - 3
+      - '3'
       - -ui
       - -retry-join
       - consul-vault-consul-1
@@ -59,7 +59,14 @@ services:
     volumes:
     - /var/run/docker.sock:/tmp/docker.sock
     tty: true
-    command: "-resync 300 -ttl 300 -ttl-refresh 60 consul://localhost:8500"
+    command: 
+      - -resync
+      - '300'
+      - -ttl
+      - '300'
+      - -ttl-refresh
+      - '60'
+      - consul://localhost:8500
     labels:
       io.rancher.container.dns: true
       io.rancher.container.hostname_override: container_name
